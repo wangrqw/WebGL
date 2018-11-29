@@ -26,7 +26,7 @@ function initEnviTexture0() {
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
-	enviTexture0.image.src = "./environment/front.png";
+	enviTexture0.image.src = "./envi/front.png";
 }
 
 function initEnviTexture1() {
@@ -39,7 +39,7 @@ function initEnviTexture1() {
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
-	enviTexture1.image.src = "./environment/back.png";
+	enviTexture1.image.src = "./envi/back.png";
 }
 
 function initEnviTexture2() {
@@ -53,7 +53,7 @@ function initEnviTexture2() {
 		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
 
-	enviTexture2.image.src = "./environment/right.png";
+	enviTexture2.image.src = "./envi/right.png";
 }
 
 function initEnviTexture3() {
@@ -66,7 +66,7 @@ function initEnviTexture3() {
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
-	enviTexture3.image.src = "./environment/left.png";
+	enviTexture3.image.src = "./envi/left.png";
 }
 
 function initEnviTexture4() {
@@ -79,7 +79,7 @@ function initEnviTexture4() {
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
-	enviTexture4.image.src = "./environment/upper.png";
+	enviTexture4.image.src = "./envi/upper.png";
 }
 
 function initEnviTexture5() {
@@ -92,5 +92,5 @@ function initEnviTexture5() {
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
-	enviTexture5.image.src = "./environment/down.png";
+	enviTexture5.image.src = "./envi/down.png";
 }
