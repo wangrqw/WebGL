@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> RachelWang lab4</title>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+	<style type="text/css">
+		input.input{
+			width: 12px
+		}
+
+		/* Create three equal columns that floats next to each other */
+		.column {
+			float: left;
+			width: 40%;
+			padding: 10px;
+			height: 300px; /* Should be removed. Only for demonstration */
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	</style>
+
+	
+	<!-- matrix -->
+	<script type="text/javascript" src="gl-matrix-min.js"></script> <!--front!-->
+
+	<!--Vertex Shader-->
+	<script id="shader-vs" type="x-shader/x-vertex">	
+	precision mediump float;
+
+	attribute vec3 aVertexPosition;
+	attribute vec3 aVertexNormal;
+
+	uniform mat4 uMVPMatrix;
+	uniform mat4 uNMatrix;
+		
+	void main(void){
+		gl_Position = uMVPMatrix * vec4(aVertexPosition, 1.0);
+	}
+	</script>
+
+	<!--Fragment Shader-->
+	<script id="shader-fs" type="x-shader/x-fragment">
+	precision mediump float;
+
+	uniform mat4 uMVPMatrix;
+	uniform mat4 uNMatrix;
+
+	void main(void){
+
+		gl_FragColor = vec4(0.4, 0.9, 0.5, 1.0);
+		
+	}
+	</script>
+	
+	<script type="text/javascript" src="cube.js"></script>
+	<script type="text/javascript" src="vbo.js"></script>
+	<script type="text/javascript" src="shaders_setup.js"></script>
+</head>
+
+<body onload="webGLStart();">
+
+	<div class="row">
+
+	<div class="column">
+		<canvas id="canvas" style="border: 1px solid gray; left: 50; top: 50; z-index: 0;" width="300" height="300"></canvas>
+	</div>
+
+	
+	<div class="column">
+	<p>
+		Camera Location [
+		<input class="input" type="text" id="cameraLocX" value="-5">
+		,
+		<input class="input" type="text" id="cameraLocY" value="0">
+		,
+		<input class="input" type="text" id="cameraLocZ" value="5">
+		]
+	</p>
+
+	<p>
+		Camera Focus [
+		<input class="input" type="text" id="cameraFocusX" value="0">
+		,
+		<input class="input" type="text" id="cameraFocusY" value="0">
+		,
+		<input class="input" type="text" id="cameraFocusZ" value="0">
+		]
+	</p>
+
+	<p>
+		View-Up Vector [
+		<input class="input" type="text" id="viewUpX" value="0">
+		,
+		<input class="input" type="text" id="viewUpY" value="1">
+		,
+		<input class="input" type="text" id="viewUpZ" value="0">
+		]
+	</p>
+	
+	<br>
+	
+	<button  onclick="drawScene()"> Set Camera Above</button>
+
+	</div>
+</div>
+			
+
+</body>
+
+</html>
