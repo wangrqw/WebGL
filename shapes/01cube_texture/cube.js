@@ -41,10 +41,8 @@ function setViewUniforms() {
 }
 
 function setAllMatrices(){
-	
+
 	// setup mvp
-	mat4.lookAt(vMatrix, getCamera("cameraLoc"), getCamera("cameraFocus"), getCamera("viewUp"));
-	mat4.perspective(pMatrix, toRad(60), 1.0, 0.1, 100);
 	mat4.multiply(mvMatrix, vMatrix, mMatrix);
 	mat4.multiply(mvpMatrix, pMatrix, mvMatrix);
 
@@ -63,13 +61,10 @@ function setAllMatrices(){
 	setViewUniforms();
 }
 
-function drawScene(){
-	// set matrix
-	setAllMatrices();
-
-	// draw objects
-	drawCube();
+function drawScene(){		
+	drawCube(10);
 }
+
 
 function webGLStart(){
 
@@ -88,15 +83,25 @@ function webGLStart(){
 	// get attribute in shader
 	shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
 	gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
-	shaderProgram.vertexNormalAttribute = gl.getAttribLocation(shaderProgram, "aVertexNormal");
-	gl.enableVertexAttribArray(shaderProgram.vertexNormalAttribute);
+	// shaderProgram.vertexNormalAttribute = gl.getAttribLocation(shaderProgram, "aVertexNormal");
+	// gl.enableVertexAttribArray(shaderProgram.vertexNormalAttribute);
+	shaderProgram.vertexTexCoordAttribute = gl.getAttribLocation(shaderProgram, "aVertexTexCoord");
+	gl.enableVertexAttribArray(shaderProgram.vertexTexCoordAttribute);
 
 	//get uniform in shader
 	shaderProgram.mvpMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVPMatrix");
 	shaderProgram.nMatrixUniform = gl.getUniformLocation(shaderProgram, "uNMatrix");
 
-	// initial vbo and draw
-	initCubeBuffer();
+	//get texture in shader
+	shaderProgram.texture0 = gl.getUniformLocation(shaderProgram, "uObjTexture0");
+	// shaderProgram.texture1 = gl.getUniformLocation(shaderProgram, "uObjTexture1");
+	// shaderProgram.texture2 = gl.getUniformLocation(shaderProgram, "uObjTexture2");
+	// shaderProgram.texture3 = gl.getUniformLocation(shaderProgram, "uObjTexture3");
+	// shaderProgram.texture4 = gl.getUniformLocation(shaderProgram, "uObjTexture4");
+	// shaderProgram.texture5 = gl.getUniformLocation(shaderProgram, "uObjTexture5");
+
+	initEnvironment();
+	
 	drawScene();
 }
 
@@ -112,12 +117,10 @@ function getCamera(id){
 	var x = +document.getElementById(id + "X").value;
 	var y = +document.getElementById(id + "Y").value;
 	var z = +document.getElementById(id + "Z").value;
-	console.log("[" + x + ", " + y + ", " + z + "]");
-	console.log(x+y+z);
+
 	vector.push(x);
 	vector.push(y);
 	vector.push(z);
 
-	console.log(id, " ", vector);
 	return vector;
 }

@@ -34,12 +34,23 @@
 	precision mediump float;
 
 	attribute vec3 aVertexPosition;
+	attribute vec2 aVertexTexCoord;
 	attribute vec3 aVertexNormal;
 
 	uniform mat4 uMVPMatrix;
 	uniform mat4 uNMatrix;
+
+	uniform sampler2D uObjTexture0;
+	//uniform sampler2D uObjTexture1;
+	//uniform sampler2D uObjTexture2;
+	//uniform sampler2D uObjTexture3;
+	//uniform sampler2D uObjTexture4;
+	//uniform sampler2D uObjTexture5;
+
+	varying highp vec2 objTexCoord;
 		
 	void main(void){
+		objTexCoord = aVertexTexCoord;
 		gl_Position = uMVPMatrix * vec4(aVertexPosition, 1.0);
 	}
 	</script>
@@ -51,15 +62,30 @@
 	uniform mat4 uMVPMatrix;
 	uniform mat4 uNMatrix;
 
+	uniform sampler2D uObjTexture0;
+	//uniform sampler2D uObjTexture1;
+	//uniform sampler2D uObjTexture2;
+	//uniform sampler2D uObjTexture3;
+	//uniform sampler2D uObjTexture4;
+	//uniform sampler2D uObjTexture5;
+
+	varying highp vec2 objTexCoord;
+
 	void main(void){
 
+		vec2 objTexCoord = vec2(objTexCoord.x, 1.0 - objTexCoord.y);
+
+		vec4 objTexColor = texture2D(uObjTexture0, objTexCoord);
+
 		gl_FragColor = vec4(0.4, 0.9, 0.5, 1.0);
+		gl_FragColor = objTexColor;
 		
 	}
 	</script>
 	
 	<script type="text/javascript" src="cube.js"></script>
 	<script type="text/javascript" src="vbo.js"></script>
+	<script type="text/javascript" src="texture.js"></script>
 	<script type="text/javascript" src="shaders_setup.js"></script>
 </head>
 
@@ -75,11 +101,11 @@
 	<div class="column">
 	<p>
 		Camera Location [
-		<input class="input" type="text" id="cameraLocX" value="0">
+		<input class="input" type="text" id="cameraLocX" value="-5">
 		,
 		<input class="input" type="text" id="cameraLocY" value="0">
 		,
-		<input class="input" type="text" id="cameraLocZ" value="3">
+		<input class="input" type="text" id="cameraLocZ" value="5">
 		]
 	</p>
 
